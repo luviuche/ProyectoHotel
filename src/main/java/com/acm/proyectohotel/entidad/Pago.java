@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import com.acm.proyectohotel.enums.MetodoPago;
+import com.acm.proyectohotel.enums.EstadoPago;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -25,11 +27,13 @@ public class Pago {
     @Column(nullable = false)
     private BigDecimal monto;
 
-    @Column(name = "metodo_pago", nullable = false)
-    private String metodoPago;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "metodo_pago", nullable = false, length = 30)
+    private MetodoPago metodoPago;
 
-    @Column(nullable = false)
-    private String estado;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 30)
+    private EstadoPago estado;
 
     @Column(name = "fecha_pago", nullable = false)
     private LocalDateTime fechaPago;

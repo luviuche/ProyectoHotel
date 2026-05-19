@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import com.acm.proyectohotel.enums.TipoServicio;
 import java.math.BigDecimal;
 
 @Entity
@@ -20,8 +21,9 @@ public class Servicio {
     @Column(nullable = false)
     private String nombre;
 
-    @Column(nullable = false)
-    private String tipo;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 50)
+    private TipoServicio tipo;
 
     private String descripcion;
 

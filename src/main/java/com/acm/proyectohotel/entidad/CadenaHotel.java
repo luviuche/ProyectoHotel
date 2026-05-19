@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import com.acm.proyectohotel.enums.EstadoGeneral;
 
 @Entity
 @Table(name = "cadena_hotel")
@@ -21,7 +22,8 @@ public class CadenaHotel {
 
     private String descripcion;
 
-    @Column(nullable = false)
-    private String estado;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 30)
+    private EstadoGeneral estado;
 }
 

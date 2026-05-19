@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
+import com.acm.proyectohotel.enums.EstadoReserva;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -30,8 +31,9 @@ public class Reserva {
     @Column(name = "fecha_salida", nullable = false)
     private LocalDate fechaSalida;
 
-    @Column(nullable = false)
-    private String estado;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 30)
+    private EstadoReserva estado;
 
     @Column(nullable = false)
     private BigDecimal total;

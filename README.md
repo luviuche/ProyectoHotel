@@ -75,20 +75,28 @@ generado por Hibernate). No requieren PostgreSQL.
 ProyectoHotel/
 ├── docs/                                  # Documentación del proyecto
 │   ├── Primera Entrega Proyecto Final 1.pdf   (enunciado)
-│   └── Documento Técnico (...).docx            (análisis y requerimientos)
+│   ├── Documento Técnico (...).docx            (análisis y requerimientos)
+│   └── modelo-relacional.md                    (diagrama ER + normalización)
 ├── src/main/java/com/acm/proyectohotel/
 │   ├── ProyectoHotelApplication.java
-│   └── entidad/                           # Entidades JPA (modelo relacional)
+│   ├── entidad/                           # Entidades JPA (modelo relacional)
+│   └── enums/                             # Dominios controlados (estados, etc.)
 ├── src/main/resources/
 │   ├── application.properties             # Configuración PostgreSQL
 │   ├── application-test.properties        # Configuración H2 (pruebas)
 │   └── db/migration/                      # Migraciones Flyway
+│       ├── V1__crear_tablas.sql
+│       ├── V2__restricciones_e_indices.sql
+│       └── V3__datos_iniciales.sql
 └── src/test/java/...
 ```
 
 ## Notas
 
-- El diagrama relacional aún no está incluido en `docs/`. Si modificas el modelo,
-  actualiza las entidades y la migración Flyway de forma coherente.
-- Para añadir cambios al esquema, crea una nueva migración
-  (`V2__...sql`); no edites `V1`.
+- El diagrama relacional está en [`docs/modelo-relacional.md`](docs/modelo-relacional.md)
+  (Mermaid, se renderiza en GitHub). Si modificas el modelo, actualiza las
+  entidades, la migración y el diagrama de forma coherente.
+- Para añadir cambios al esquema, crea una **nueva** migración
+  (`V4__...sql`); nunca edites una migración ya aplicada.
+- Los datos de catálogo (`rol`, `tipo_habitacion`) se cargan automáticamente
+  con `V3__datos_iniciales.sql`.

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import com.acm.proyectohotel.enums.EstadoHabitacion;
 import java.math.BigDecimal;
 
 @Entity
@@ -37,8 +38,9 @@ public class Habitacion {
     @Column(name = "precio_noche", nullable = false)
     private BigDecimal precioNoche;
 
-    @Column(nullable = false)
-    private String estado;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 30)
+    private EstadoHabitacion estado;
 
     @Column(nullable = false)
     private Boolean disponible;

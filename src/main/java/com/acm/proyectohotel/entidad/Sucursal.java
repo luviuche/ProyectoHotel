@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import com.acm.proyectohotel.enums.EstadoGeneral;
 
 @Entity
 @Table(name = "sucursal")
@@ -38,7 +39,8 @@ public class Sucursal {
     @Column(nullable = false)
     private String categoria;
 
-    @Column(nullable = false)
-    private String estado;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 30)
+    private EstadoGeneral estado;
 }
 
