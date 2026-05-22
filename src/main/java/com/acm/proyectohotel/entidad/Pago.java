@@ -1,5 +1,7 @@
 package com.acm.proyectohotel.entidad;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,6 +22,7 @@ public class Pago {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "reserva_id", nullable = false, unique = true)
     private Reserva reserva;
@@ -37,5 +40,19 @@ public class Pago {
 
     @Column(name = "fecha_pago", nullable = false)
     private LocalDateTime fechaPago;
-}
 
+    @JsonProperty("reservaId")
+    public Long getReservaId() {
+        return reserva != null ? reserva.getId() : null;
+    }
+
+    public void setReservaId(Long reservaId) {
+        if (reservaId == null) {
+            this.reserva = null;
+        } else {
+            Reserva referencia = new Reserva();
+            referencia.setId(reservaId);
+            this.reserva = referencia;
+        }
+    }
+}

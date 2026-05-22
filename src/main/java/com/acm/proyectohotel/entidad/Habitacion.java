@@ -1,5 +1,7 @@
 package com.acm.proyectohotel.entidad;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,10 +20,12 @@ public class Habitacion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "sucursal_id", nullable = false)
     private Sucursal sucursal;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tipo_id", nullable = false)
     private TipoHabitacion tipo;
@@ -44,5 +48,34 @@ public class Habitacion {
 
     @Column(nullable = false)
     private Boolean disponible;
-}
 
+    @JsonProperty("sucursalId")
+    public Long getSucursalId() {
+        return sucursal != null ? sucursal.getId() : null;
+    }
+
+    public void setSucursalId(Long sucursalId) {
+        if (sucursalId == null) {
+            this.sucursal = null;
+        } else {
+            Sucursal referencia = new Sucursal();
+            referencia.setId(sucursalId);
+            this.sucursal = referencia;
+        }
+    }
+
+    @JsonProperty("tipoId")
+    public Long getTipoId() {
+        return tipo != null ? tipo.getId() : null;
+    }
+
+    public void setTipoId(Long tipoId) {
+        if (tipoId == null) {
+            this.tipo = null;
+        } else {
+            TipoHabitacion referencia = new TipoHabitacion();
+            referencia.setId(tipoId);
+            this.tipo = referencia;
+        }
+    }
+}

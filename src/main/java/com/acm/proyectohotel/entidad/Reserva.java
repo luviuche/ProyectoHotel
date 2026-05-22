@@ -1,5 +1,7 @@
 package com.acm.proyectohotel.entidad;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,6 +23,7 @@ public class Reserva {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cliente_id", nullable = false)
     private Usuario cliente;
@@ -41,5 +44,19 @@ public class Reserva {
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
-}
 
+    @JsonProperty("clienteId")
+    public Long getClienteId() {
+        return cliente != null ? cliente.getId() : null;
+    }
+
+    public void setClienteId(Long clienteId) {
+        if (clienteId == null) {
+            this.cliente = null;
+        } else {
+            Usuario referencia = new Usuario();
+            referencia.setId(clienteId);
+            this.cliente = referencia;
+        }
+    }
+}
