@@ -38,7 +38,7 @@ public class PagoService {
 
     public Pago crear(Pago pago) {
         Reserva reserva = resolverReserva(pago.getReservaId());
-        if (pagoRepository.existsByReservaId(reserva.getId())) {
+        if (pagoRepository.existsByReserva_Id(reserva.getId())) {
             throw new ReglaNegocioException("La reserva " + reserva.getId() + " ya tiene un pago registrado.");
         }
         pago.setReserva(reserva);
@@ -56,7 +56,7 @@ public class PagoService {
         Pago existente = obtener(id);
         Reserva reserva = resolverReserva(datos.getReservaId());
         if (!existente.getReserva().getId().equals(reserva.getId())
-                && pagoRepository.existsByReservaId(reserva.getId())) {
+                && pagoRepository.existsByReserva_Id(reserva.getId())) {
             throw new ReglaNegocioException("La reserva " + reserva.getId() + " ya tiene un pago registrado.");
         }
         existente.setReserva(reserva);

@@ -38,7 +38,7 @@ public class FacturaService {
 
     public Factura crear(Factura factura) {
         Pago pago = resolverPago(factura.getPagoId());
-        if (facturaRepository.existsByPagoId(pago.getId())) {
+        if (facturaRepository.existsByPago_Id(pago.getId())) {
             throw new ReglaNegocioException("El pago " + pago.getId() + " ya tiene una factura asociada.");
         }
         if (facturaRepository.existsByNumeroFactura(factura.getNumeroFactura())) {
@@ -55,7 +55,7 @@ public class FacturaService {
         Factura existente = obtener(id);
         Pago pago = resolverPago(datos.getPagoId());
         if (!existente.getPago().getId().equals(pago.getId())
-                && facturaRepository.existsByPagoId(pago.getId())) {
+                && facturaRepository.existsByPago_Id(pago.getId())) {
             throw new ReglaNegocioException("El pago " + pago.getId() + " ya tiene una factura asociada.");
         }
         if (!existente.getNumeroFactura().equals(datos.getNumeroFactura())

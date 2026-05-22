@@ -9,11 +9,12 @@ import java.util.Optional;
 @Repository
 public interface FacturaRepository extends JpaRepository<Factura, Long> {
 
-    Optional<Factura> findByPagoId(Long pagoId);
+    // Guion bajo: fuerza la travesia pago.id (evita colision con getPagoId()).
+    Optional<Factura> findByPago_Id(Long pagoId);
 
     Optional<Factura> findByNumeroFactura(String numeroFactura);
 
     boolean existsByNumeroFactura(String numeroFactura);
 
-    boolean existsByPagoId(Long pagoId);
+    boolean existsByPago_Id(Long pagoId);
 }

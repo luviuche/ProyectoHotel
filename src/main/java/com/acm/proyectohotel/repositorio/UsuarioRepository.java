@@ -16,5 +16,6 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
     boolean existsByDocumento(String documento);
 
-    List<Usuario> findByRolId(Long rolId);
+    // Guion bajo: fuerza la travesia rol.id (evita colision con el getter getRolId()).
+    List<Usuario> findByRol_Id(Long rolId);
 }

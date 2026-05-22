@@ -11,9 +11,10 @@ import java.util.Optional;
 @Repository
 public interface PagoRepository extends JpaRepository<Pago, Long> {
 
-    Optional<Pago> findByReservaId(Long reservaId);
+    // Guion bajo: fuerza la travesia reserva.id (evita colision con getReservaId()).
+    Optional<Pago> findByReserva_Id(Long reservaId);
 
-    boolean existsByReservaId(Long reservaId);
+    boolean existsByReserva_Id(Long reservaId);
 
     List<Pago> findByEstado(EstadoPago estado);
 }

@@ -10,7 +10,8 @@ import java.util.List;
 @Repository
 public interface ReservaRepository extends JpaRepository<Reserva, Long> {
 
-    List<Reserva> findByClienteId(Long clienteId);
+    // Guion bajo: fuerza la travesia cliente.id (evita colision con getClienteId()).
+    List<Reserva> findByCliente_Id(Long clienteId);
 
     List<Reserva> findByEstado(EstadoReserva estado);
 }

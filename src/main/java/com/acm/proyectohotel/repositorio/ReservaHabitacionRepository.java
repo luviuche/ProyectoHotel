@@ -9,7 +9,8 @@ import java.util.List;
 @Repository
 public interface ReservaHabitacionRepository extends JpaRepository<ReservaHabitacion, Long> {
 
-    List<ReservaHabitacion> findByReservaId(Long reservaId);
+    // Guion bajo: fuerza la travesia reserva.id / habitacion.id (evita colision con los getters).
+    List<ReservaHabitacion> findByReserva_Id(Long reservaId);
 
-    List<ReservaHabitacion> findByHabitacionId(Long habitacionId);
+    List<ReservaHabitacion> findByHabitacion_Id(Long habitacionId);
 }

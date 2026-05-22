@@ -10,11 +10,12 @@ import java.util.List;
 @Repository
 public interface HabitacionRepository extends JpaRepository<Habitacion, Long> {
 
-    List<Habitacion> findBySucursalId(Long sucursalId);
+    // Guion bajo: fuerza la travesia sucursal.id (evita colision con getSucursalId()).
+    List<Habitacion> findBySucursal_Id(Long sucursalId);
 
     List<Habitacion> findByEstado(EstadoHabitacion estado);
 
     List<Habitacion> findByDisponibleTrue();
 
-    boolean existsBySucursalIdAndNumero(Long sucursalId, String numero);
+    boolean existsBySucursal_IdAndNumero(Long sucursalId, String numero);
 }

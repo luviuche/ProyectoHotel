@@ -45,7 +45,7 @@ public class HabitacionService {
         Sucursal sucursal = resolverSucursal(habitacion.getSucursalId());
         habitacion.setSucursal(sucursal);
         habitacion.setTipo(resolverTipo(habitacion.getTipoId()));
-        if (habitacionRepository.existsBySucursalIdAndNumero(sucursal.getId(), habitacion.getNumero())) {
+        if (habitacionRepository.existsBySucursal_IdAndNumero(sucursal.getId(), habitacion.getNumero())) {
             throw new ReglaNegocioException(
                     "La sucursal ya tiene una habitacion con el numero '" + habitacion.getNumero() + "'.");
         }
@@ -60,7 +60,7 @@ public class HabitacionService {
         boolean cambioNumeroOSucursal = !existente.getSucursal().getId().equals(sucursal.getId())
                 || !existente.getNumero().equals(datos.getNumero());
         if (cambioNumeroOSucursal
-                && habitacionRepository.existsBySucursalIdAndNumero(sucursal.getId(), datos.getNumero())) {
+                && habitacionRepository.existsBySucursal_IdAndNumero(sucursal.getId(), datos.getNumero())) {
             throw new ReglaNegocioException(
                     "La sucursal ya tiene una habitacion con el numero '" + datos.getNumero() + "'.");
         }
