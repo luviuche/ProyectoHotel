@@ -1,5 +1,7 @@
 package com.acm.proyectohotel.entidad;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,6 +20,7 @@ public class Factura {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "pago_id", nullable = false, unique = true)
     private Pago pago;
@@ -38,5 +41,19 @@ public class Factura {
     private LocalDateTime fechaEmision;
 
     private String descripcion;
-}
 
+    @JsonProperty("pagoId")
+    public Long getPagoId() {
+        return pago != null ? pago.getId() : null;
+    }
+
+    public void setPagoId(Long pagoId) {
+        if (pagoId == null) {
+            this.pago = null;
+        } else {
+            Pago referencia = new Pago();
+            referencia.setId(pagoId);
+            this.pago = referencia;
+        }
+    }
+}

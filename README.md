@@ -1,10 +1,15 @@
 # ProyectoHotel
 
-Sistema de Gestión Hotelera — **Primera Entrega del Proyecto Final**.
+Sistema de Gestión Hotelera — **Segunda Entrega del Proyecto Final**.
 
-Esta entrega cubre el modelo relacional, las entidades JPA, la configuración de
-persistencia y las migraciones automáticas de base de datos. Aún no incluye
-lógica de negocio (servicios/controladores).
+- **Primera entrega:** modelo relacional, entidades JPA, configuración de
+  persistencia y migraciones automáticas de base de datos.
+- **Segunda entrega:** capa funcional del backend — repositorios
+  (`JpaRepository`), servicios con la lógica de negocio y controladores REST con
+  operaciones CRUD completas para todas las entidades.
+
+La referencia completa de la API REST está en
+[`docs/api-endpoints.md`](docs/api-endpoints.md).
 
 ## Tecnologías
 
@@ -74,13 +79,19 @@ generado por Hibernate). No requieren PostgreSQL.
 ```
 ProyectoHotel/
 ├── docs/                                  # Documentación del proyecto
-│   ├── Primera Entrega Proyecto Final 1.pdf   (enunciado)
+│   ├── Primera Entrega Proyecto Final 1.pdf   (enunciado entrega 1)
+│   ├── Entrega dos proyecto final.pdf          (enunciado entrega 2)
 │   ├── Documento Técnico (...).docx            (análisis y requerimientos)
-│   └── modelo-relacional.md                    (diagrama ER + normalización)
+│   ├── modelo-relacional.md                    (diagrama ER + normalización)
+│   └── api-endpoints.md                        (referencia de la API REST)
 ├── src/main/java/com/acm/proyectohotel/
 │   ├── ProyectoHotelApplication.java
 │   ├── entidad/                           # Entidades JPA (modelo relacional)
-│   └── enums/                             # Dominios controlados (estados, etc.)
+│   ├── enums/                             # Dominios controlados (estados, etc.)
+│   ├── repositorio/                       # Repositorios JpaRepository (acceso a datos)
+│   ├── servicio/                          # Lógica de negocio y validaciones
+│   ├── controlador/                       # Controladores REST (/api/...)
+│   └── excepcion/                         # Manejo global de errores
 ├── src/main/resources/
 │   ├── application.properties             # Configuración PostgreSQL
 │   ├── application-test.properties        # Configuración H2 (pruebas)
